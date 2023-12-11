@@ -6,10 +6,11 @@ import knex from 'knex';
 import { handleRegister } from './controllers/register.js';
 import { handleSignin } from './controllers/signin.js';
 import { handleCreateNewJacket, handleGetBlazers } from './controllers/blazers.js';
+import cookieParser from 'cookie-parser';
 
 
-
-const db = knex({
+/* const DATABASE_URL = "postgres://lk_store_db_user:kQ1AtUB7zXS5O9PT7g6ZXy3TLTAyhslH@dpg-ckqir91rfc9c7390dfu0-a.oregon-postgres.render.com/lk_store_db"; */
+/* const db = knex({
   client: "pg",
   connection: {
     connectionString: process.env.DATABASE_URL,
@@ -17,9 +18,9 @@ const db = knex({
       rejectUnauthorized: false,
     },
   },
-});
+}); */
 /* for local */
-/* const db = knex({
+const db = knex({
   client: "pg",
   connection: {
     host: "127.0.0.1",
@@ -28,12 +29,13 @@ const db = knex({
     password: "melages332",
     database: "lk-store",
   },
-}); */
+});
 
 const app = express();
 
 app.use(cors());
 app.use(express.json())
+app.use(cookieParser())
 
 
 app.get("/", (req, res) => {

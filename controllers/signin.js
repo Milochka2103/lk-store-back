@@ -14,6 +14,7 @@ export const handleSignin = (db, bcrypt) => (req, res) => {
           .from('users')
           .where('email', '=', email)
           .then((user) => {
+            res.cookie('userData', JSON.stringify(user[0]), {httpOnly: true})
             res.json(user[0]);
           })
           .catch((err) => res.status(400).json('Unable to get user'))
